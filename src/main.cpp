@@ -20,7 +20,7 @@
 
 
 
-// #define MAX3059_AQUABUS_ADAPTER gfgfhgfhfg
+// #define MAX3059_AQUABUS_ADAPTER 
 
 // Include header files
 #include <AquaBusDev.h>
