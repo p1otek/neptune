@@ -13,11 +13,11 @@
 
 #define DEBUG
 #ifdef DEBUG
-//	#include <SoftwareSerial.h>
-//	extern SoftwareSerial Serial2;
-#define DEBUG_LOG(string) Serial2.print(string)
-#define DEBUG_LOG_LN(string) Serial2.println(string)
-#define DEBUG_LOG_HEX(string) Serial2.print(string, HEX)
+	#include <SoftwareSerial.h>
+	extern SoftwareSerial DebugSerial;
+#define DEBUG_LOG(string) DebugSerial.print(string)
+#define DEBUG_LOG_LN(string) DebugSerial.println(string)
+#define DEBUG_LOG_HEX(string) DebugSerial.print(string, HEX)
 #else
 #define DEBUG_LOG(string)
 #define DEBUG_LOG_LN(string)
@@ -40,7 +40,7 @@ AB_PROBE_RESPONSE_FRAME AquaBusLib::ProbeResponseFrame = {};
 // Static callback function for handling initial probing
 eMBException AquaBusLib::probeCallback(byte address, byte *frame, unsigned short length)
 {
-  DEBUG_LOG_LN("probeCallback enter");
+//  DEBUG_LOG_LN("probeCallback enter");
   // Define the request structure
   int i = 0;
   struct AB_PROBE_REQUEST_PACKET
@@ -98,7 +98,7 @@ eMBException AquaBusLib::probeCallback(byte address, byte *frame, unsigned short
   if (((AB_PROBE_REQUEST_PACKET *)frame)->stage == 5)
     devices[i]->bAttached = true;
 
-  DEBUG_LOG_LN("probeCallback exit");
+ // DEBUG_LOG_LN("probeCallback exit");
   return MB_EX_NONE;
 }
 
@@ -214,7 +214,7 @@ void AquaBusLib::setup()
   else
     DEBUG_LOG_LN("eMBEnable success");
 
-  DEBUG_LOG_LN("MB Enabled");
+  DEBUG_LOG_LN("<>MB Enabled");
 }
 
 // Function called from the sketch's loop function
@@ -226,14 +226,7 @@ void AquaBusLib::loop()
 
   if (ret != MB_ENOERR)
     DEBUG_LOG_LN("ERROR: eMBPoll");
-/*  else
-        heartBeat++;
 
-  if (heartBeat>50000){
-    DEBUG_LOG("heartBeat ");
-    heartBeat=0;
-  }
-  */  
     
 }
 

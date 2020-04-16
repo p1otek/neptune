@@ -99,12 +99,20 @@ typedef long    LONG;
 #define TIMSK1          TIMSK
 #define TIFR1           TIFR
 
-#elif defined (__AVR_ATmega32__)
-#define UBRR            UBRRL
-#define TCCR1C          TCCR1A  /* dummy */
-#define TIMSK1          TIMSK
-#define TIFR1           TIFR
-
+#elif defined (__AVR_ATmega32U4__)
+#define UBRR            UBRR1L
+#define UCSRB           UCSR1B
+#define TXEN            TXEN1
+#define RXEN            RXEN1
+#define RXCIE           RXCIE1
+#define TXCIE           TXCIE1
+#define UPM1            UPM11
+#define UPM0            UPM10
+#define UCSZ0           UCSZ10
+#define UCSZ1           UCSZ11
+#define UCSRC           UCSR1C
+#define UDR             UDR1
+#define UDRE            UDRE1
 
 #elif defined (__AVR_ATmega128__) || defined (__AVR_ATmega128A__)
 #define UCSRB           UCSR0B
@@ -122,6 +130,29 @@ typedef long    LONG;
 #define UCSRC           UCSR0C
 
 #elif defined (__AVR_ATmega2560__) 
+
+#define UCSRB           UCSR0B
+#define TXEN            TXEN0
+#define RXEN            RXEN0
+#define RXCIE           RXCIE0
+#define TXCIE           TXCIE0
+#define UDRE            UDRE0
+#define UBRR            UBRR0L
+#define UPM0            UPM00
+#define UPM1            UPM01
+#define UCSZ0           UCSZ00
+#define UCSZ1           UCSZ01
+#define UCSRC           UCSR0C
+//#define SIG_UART_TRANS  USART0_TX_vect
+//#define SIG_USART_DATA  USART0_UDRE_vect	 // ---> https://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
+//#define SIG_USART_RECV  USART0_RX_vect
+
+#define UDR             UDR0
+#define USART_UDRE_vect USART0_UDRE_vect
+#define USART_RX_vect   USART0_RX_vect
+//#define USART_TX_vect   USART0_TX_vect
+/*
+#elif defined (__AVR_ATmega2560__) 
 #define UCSRB           UCSR0B
 #define TXEN            TXEN0
 #define RXEN            RXEN0
@@ -132,7 +163,10 @@ typedef long    LONG;
 #define UPM0            UPM00
 #define UCSZ0           UCSZ00
 #define UCSZ1           UCSZ01
-
+#define USART_UDRE_vect USART0_UDRE_vect
+#define USART_RX_vect   USART0_RX_vect
+#define USART_TX_vect   USART0_TX_vect
+*/
 #endif
 
 /* ----------------------- RS485 specifics ----------------------------------*/

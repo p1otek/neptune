@@ -63,7 +63,7 @@ class AquaBusLib
     // Static member variables
     static AquaBusDev** devices;
     static byte devicesCount;
-    static int heartBeat;
+    
 
     // Static member functions
     static void addDevice(AquaBusDev* device);

@@ -75,7 +75,7 @@ void EB8::processEEPROMRequest(byte deviceABAddr, byte* data, unsigned short len
 			//this matches our internal eeprom format
 			for (int i = ((AB_EEPROM_GET_SET_REQUEST_PACKET*)data)->Location; i < ((AB_EEPROM_GET_SET_REQUEST_PACKET*)data)->Length; i++)
 			{
-				eeprom_update_byte(i, ((AB_EEPROM_GET_SET_REQUEST_PACKET*)data)->data[index]);
+				eeprom_update_byte((uint8_t *)i, ((AB_EEPROM_GET_SET_REQUEST_PACKET*)data)->data[index]);
 				index++;
 			}
 			break;

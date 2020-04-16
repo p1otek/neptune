@@ -38,9 +38,8 @@
     ((F_OSC) / ((UART_BAUD_RATE)*16UL) - 1)
 
 //#define UART_UCSRB  UCSR0B
-#define UDR UDR0
+//#define UDR UDR0
 
-#define UART_UCSRB  UCSR0B
 void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
 {
 
@@ -82,7 +81,7 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
 
     UBRR = UART_BAUD_CALC(ulBaudRate, F_CPU);
     //Apex Atmega88pa sets this to 25
-    //UBRR = 25;
+   // UBRR = 25;
 
     switch (eParity)
     {
@@ -107,12 +106,12 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
     }
 
     //Set stop bit
-    ucUCSRC |= _BV(USBS0); //////////////////////////////////////////////////////////////////////////////////////////////// było ucUCSRC |= _BV(USBS0)
+    ucUCSRC |= _BV(USBS0); 
 
 #if defined(__AVR_ATmega88__) || defined(__AVR_ATmega88A__) || defined(__AVR_ATmega88P__) ||     \
     defined(__AVR_ATmega88PA__) || defined(__AVR_ATmega168__) || defined(__AVR_ATmega168A__) ||  \
     defined(__AVR_ATmega168P__) || defined(__AVR_ATmega168PA__) || defined(__AVR_ATmega328__) || \
-    defined(__AVR_ATmega328P__)
+    defined(__AVR_ATmega328P__) 
     UCSRC |= ucUCSRC;
 #elif defined(__AVR_ATmega169__) || defined(__AVR_ATmega169A__) || defined(__AVR_ATmega169P__) || \
     defined(__AVR_ATmega169PA__)
@@ -121,12 +120,14 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
     UCSRC = _BV(URSEL) | ucUCSRC;
 #elif defined(__AVR_ATmega16__)
     UCSRC = _BV(URSEL) | ucUCSRC;
-#elif defined(__AVR_ATmega32__)
-    UCSRC = _BV(URSEL) | ucUCSRC;
+#elif defined(__AVR_ATmega32U4__)
+   // UCSRC = _BV(URSEL) | ucUCSRC;   //nie ma bitu URSEL w atmedz32u4
+    UCSRC |= ucUCSRC;
 #elif defined(__AVR_ATmega128__) || defined(__AVR_ATmega128A__)
     UCSRC |= ucUCSRC;
+#elif defined(__AVR_ATmega2560__) 
+    UCSRC |= ucUCSRC;
 #endif
-
     vMBPortSerialEnable(FALSE, FALSE);
 
 #ifdef RTS_ENABLE

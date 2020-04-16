@@ -83,7 +83,7 @@ vMBPortTimersDisable(  )
     TIFR1 |= _BV( OCF1A ) ;
 }
 
-ISR(TIMER1_COMPA_vect)
+ISR(SIG_OUTPUT_COMPARE1A_vect)
 {
     ( void )pxMBPortCBTimerExpired(  );
 }
