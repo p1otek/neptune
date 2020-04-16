@@ -135,7 +135,6 @@ class PM1 : public AquaBusDev
     static AB_PM1_DATA_RESPONSE_FRAME PM1DataResponseFrame;
     static AB_PM1_INIT_RESPONSE_FRAME PM1InitResponseFrame;
     static AB_PM1_EEPROM_RESPONSE_FRAME EEPROMResponseFrame;
-  
 
   protected:
     // Member functions

@@ -25,17 +25,18 @@
 // Include header files
 #include <AquaBusDev.h>
 #include <AquaBusLib.h>
-//#include <EB8.h>
+#include <EB8.h>
 //#include <PM2.h>
-#include <PM1.h>
+//#include <PM1.h>
 //#include <PM3.h>
 //#include <VDM.h>
 
  SoftwareSerial DebugSerial(8, 9); // 8 is RX, 9  is TX
 AquaBusLib gAquaBusLib(1);
 
+EB8 gEB8_1(0x7676);
 
-PM1 gPM1(0x7777);
+//PM1 gPM1(0x7777);
 
 int incomingByte = 0; // for incoming serial data
 
@@ -46,6 +47,11 @@ void setup()
   DEBUG_SERIAL_BEGIN();
 
   DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ..."));
+
+
+  gEB8_1.SetCurSensor(ACS712_20A, A1);
+  byte eb1Outlets[8] = {22,23,24,25,26,27,28,29};
+  gEB8_1.SetOutletPins(eb1Outlets);
   /*
 #ifdef MAX3059_AQUABUS_ADAPTER
   //ON MAX3059 based boards, drive RS pin LOW and TERM pin High to match Apex cofiguration

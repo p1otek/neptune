@@ -10,13 +10,13 @@
 // This software is provided "as is" without express or implied warranty.
 
 // Debug related definitions
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 	#include <SoftwareSerial.h>
 	extern SoftwareSerial DebugSerial;
-#define DEBUG_LOG(string) DebugSerial.print(string)
-#define DEBUG_LOG_LN(string) DebugSerial.println(string)
-#define DEBUG_LOG_HEX(string) DebugSerial.print(string, HEX)
+  #define DEBUG_LOG(string) DebugSerial.print(string)
+  #define DEBUG_LOG_LN(string) DebugSerial.println(string)
+  #define DEBUG_LOG_HEX(string) DebugSerial.print(string,HEX)
 #else
   #define DEBUG_LOG(string)
   #define DEBUG_LOG_LN(string)
@@ -41,17 +41,14 @@ AquaBusDev::AquaBusDev(byte hwId, unsigned short hwSerial, byte hwRevision, byte
 {
   // Add outselves to the devices array
   AquaBusLib::addDevice(this);
-  abAddress = eeprom_read_byte(0);
-  ApexSerial = eeprom_read_word((uint16_t *)1);
-  bAttached = false;
+  probeStage = 0;
 }
 
 // Function called to send data
 // This function encapsulates the FreeModBus library function used to send the data
 void AquaBusDev::sendData(byte destABAddr, byte* data, unsigned short length)
 {
-//	DEBUG_LOG_LN("sendData");
+	DEBUG_LOG_LN("sendData");
   //peMBFrameSendCur(abAddress, data, length);
   eMBRTUSend(destABAddr, data, length);
-  
 }
