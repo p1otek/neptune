@@ -158,12 +158,12 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 eMBException AquaBusLib::deviceCallback(byte address, byte* frame, unsigned short length)
 {
 	//int i = 0;
-  //DEBUG_LOG_LN("deviceCallback enter");
-  //DEBUG_LOG("deviceCallback");
-  //DEBUG_LOG("devicesCount = ");
-  //DEBUG_LOG_LN(devicesCount);
-  //DEBUG_LOG("address = ");
-  //DEBUG_LOG_LN(address);
+  DEBUG_LOG_LN("deviceCallback enter");
+  DEBUG_LOG("deviceCallback");
+  DEBUG_LOG("devicesCount = ");
+  DEBUG_LOG_LN(devicesCount);
+  DEBUG_LOG("address = ");
+  DEBUG_LOG_LN(address);
   
   // Loop through the devices
   for (int i = 0; i < devicesCount; i++)
@@ -295,8 +295,8 @@ void AquaBusLib::loop()
   ret = eMBPoll();
   if (ret != MB_ENOERR)
   	DEBUG_LOG_LN("ERROR: eMBPoll");
-  //else
-  	//DEBUG_LOG_LN("eMBPoll success");
+  else
+  	DEBUG_LOG_LN("eMBPoll success");
 }
 
 // Function called to add a device

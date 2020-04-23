@@ -30,8 +30,15 @@ AB_PM1_DATA_RESPONSE_FRAME PM1::PM1DataResponseFrame = {};
 AB_PM1_INIT_RESPONSE_FRAME PM1::PM1InitResponseFrame = {};
 AB_PM1_EEPROM_RESPONSE_FRAME PM1::EEPROMResponseFrame = {};
 
+void PM1::Init()
+{
+	//sensor.calibrate();
+
+}
+
 //ctor
-PM1::PM1(unsigned short serial):AquaBusDev(APEX_MODULE_PM1, serial, 0x01, 0x07)
+
+PM1::PM1(unsigned short serial) : AquaBusDev(APEX_MODULE_PM1, serial, 0x01, 0x07)
 {
   ModuleStatus.ProbeRangeOriginal = eeprom_read_byte((const uint8_t *)3);
 
@@ -45,6 +52,9 @@ PM1::PM1(unsigned short serial):AquaBusDev(APEX_MODULE_PM1, serial, 0x01, 0x07)
 	ModuleStatus.Unknown_4 = eeprom_read_word((const uint16_t *) 18);
 	
 }
+
+
+
 // Function called to process recieved data
 void PM1::processData(byte deviceABAddr, byte* data, unsigned short length)
 {

@@ -60,10 +60,10 @@
 
 //#define DEBUG
 #ifdef DEBUG
-//#include <SoftwareSerial.h>
-//extern SoftwareSerial Serial2; // 6 is RX, 7 is TX
-#define DEBUG_LOG(string) Serial2.print(string)
-#define DEBUG_LOG_LN(string) Serial2.println(string)
+#include <SoftwareSerial.h>
+extern SoftwareSerial DebugSerial; // 6 is RX, 7 is TX
+#define DEBUG_LOG(string) DebugSerial.print(string)
+#define DEBUG_LOG_LN(string) DebugSerial.println(string)
 #else
 #define DEBUG_LOG(string)
 #define DEBUG_LOG_LN(string)
@@ -370,11 +370,11 @@ eMBPoll(void)
      * Otherwise we will handle the event. */
     if (xMBPortEventGet(&eEvent) == TRUE)
     {
-        //DEBUG_LOG_LN("eMBPoll G0T EVENT");
+        DEBUG_LOG_LN("eMBPoll G0T EVENT");
         switch (eEvent)
         {
         case EV_READY:
-          //  DEBUG_LOG_LN("eMBPoll EV_READY");
+            DEBUG_LOG_LN("eMBPoll EV_READY");
             break;
 
         case EV_FRAME_RECEIVED:

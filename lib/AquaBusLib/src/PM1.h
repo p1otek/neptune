@@ -140,7 +140,8 @@ class PM1 : public AquaBusDev
     // Member functions
     void processData(byte deviceABAddr, byte* data, unsigned short length);
     void processEEPROMRequest(byte deviceABAddr, byte* data, unsigned short length);
-    
+    void Init();
+	
     // Member variables
     PM1_STATUS_STRUCT ModuleStatus;
 };

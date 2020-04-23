@@ -34,12 +34,12 @@ const float ACS712_sensitivity_coef = 75.7576; //comes from solving for X, 5 V /
 
 AB_EB8_RESPONSE_FRAME EB8::EB8ResponseFrame = {};
 AB_EB8_EEPROM_RESPONSE_FRAME EB8::EEPROMResponseFrame = {};
-
-//EB8::EB8(unsigned short serial) : AquaBusDev(APEX_MODULE_EB8, serial, 0x01, 0x0C), outletStates(0)
-//{
+/*
+EB8::EB8(unsigned short serial) : AquaBusDev(APEX_MODULE_EB8, serial, 0x01, 0x0C), outletStates(0)
+{
 //  
-//}
-
+}
+*/
 void EB8::Init()
 {
 	//sensor.calibrate();
