@@ -6,7 +6,7 @@
 // This software is provided "as is" without express or implied warranty.
 
 // Debug related definitions
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
   #define DEBUG_SERIAL_BEGIN() DebugSerial.begin(115200)
   #define DEBUG_LOG(string) DebugSerial.print(string)
@@ -18,7 +18,7 @@
 #endif
 #define DEBUGV_LOG_FREE_RAM() DEBUG_LOG(F("Free RAM: ")); DEBUG_LOG_LN(FreeRam())
 
-#define MAX3059_AQUABUS_ADAPTER
+//#define MAX3059_AQUABUS_ADAPTER
 
 // Include header files
 #include <AquaBusDev.h>
@@ -79,9 +79,9 @@ eeprom_update_word(4,0);
 for (int i = 0; i < 8; i++)
 {
   pinMode(eb1Outlets[i], OUTPUT);
-  digitalWrite(eb1Outlets[i], HIGH);
+  digitalWrite(eb1Outlets[i], LOW);
   pinMode(eb2Outlets[i], OUTPUT);
-  digitalWrite(eb2Outlets[i], HIGH);
+  digitalWrite(eb2Outlets[i], LOW);
 }
 
 //AB Address Init

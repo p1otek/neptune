@@ -131,22 +131,22 @@ typedef long    LONG;
 
 #elif defined (__AVR_ATmega2560__) 
 
-#define UCSRB           UCSR0B
-#define TXEN            TXEN0
-#define RXEN            RXEN0
-#define RXCIE           RXCIE0
-#define TXCIE           TXCIE0
-#define UDRE            UDRE0
-#define UBRR            UBRR0L
-#define UPM0            UPM00
-#define UPM1            UPM01
-#define UCSZ0           UCSZ00
-#define UCSZ1           UCSZ01
-#define UCSRC           UCSR0C
-#define UDR             UDR0
-#define USART_UDRE_vect USART0_UDRE_vect
-#define USART_RX_vect   USART0_RX_vect
-#define USBS            USBS0                       //Set stop bit
+#define UCSRB           UCSR1B
+#define TXEN            TXEN1
+#define RXEN            RXEN1
+#define RXCIE           RXCIE1
+#define TXCIE           TXCIE1
+#define UDRE            UDRE1
+#define UBRR            UBRR1L
+#define UPM0            UPM10
+#define UPM1            UPM11
+#define UCSZ0           UCSZ10
+#define UCSZ1           UCSZ11
+#define UCSRC           UCSR1C
+#define UDR             UDR1
+#define USART_UDRE_vect USART1_UDRE_vect
+#define USART_RX_vect   USART1_RX_vect
+#define USBS            USBS1                       //Set stop bit
 
 
 #endif
