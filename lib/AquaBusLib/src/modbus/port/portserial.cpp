@@ -106,7 +106,7 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
     }
 
     //Set stop bit
-    ucUCSRC |= _BV(USBS0); 
+    ucUCSRC |= _BV(USBS); 
 
 #if defined(__AVR_ATmega88__) || defined(__AVR_ATmega88A__) || defined(__AVR_ATmega88P__) ||     \
     defined(__AVR_ATmega88PA__) || defined(__AVR_ATmega168__) || defined(__AVR_ATmega168A__) ||  \

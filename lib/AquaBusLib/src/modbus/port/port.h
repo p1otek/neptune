@@ -143,30 +143,12 @@ typedef long    LONG;
 #define UCSZ0           UCSZ00
 #define UCSZ1           UCSZ01
 #define UCSRC           UCSR0C
-//#define SIG_UART_TRANS  USART0_TX_vect
-//#define SIG_USART_DATA  USART0_UDRE_vect	 // ---> https://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
-//#define SIG_USART_RECV  USART0_RX_vect
-
 #define UDR             UDR0
 #define USART_UDRE_vect USART0_UDRE_vect
 #define USART_RX_vect   USART0_RX_vect
-//#define USART_TX_vect   USART0_TX_vect
-/*
-#elif defined (__AVR_ATmega2560__) 
-#define UCSRB           UCSR0B
-#define TXEN            TXEN0
-#define RXEN            RXEN0
-#define RXCIE           RXCIE0
-#define UDRE            UDRE0
-#define UBRR            UBRR0L
-#define UPM1            UPM01
-#define UPM0            UPM00
-#define UCSZ0           UCSZ00
-#define UCSZ1           UCSZ01
-#define USART_UDRE_vect USART0_UDRE_vect
-#define USART_RX_vect   USART0_RX_vect
-#define USART_TX_vect   USART0_TX_vect
-*/
+#define USBS            USBS0                       //Set stop bit
+
+
 #endif
 
 /* ----------------------- RS485 specifics ----------------------------------*/
