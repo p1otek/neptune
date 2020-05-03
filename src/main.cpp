@@ -32,8 +32,8 @@
 // Declare global variables
 SoftwareSerial DebugSerial(8, 9); // 8 is RX, 9  is TX
 AquaBusLib gAquaBusLib(2);
-EB8 gEB8_1(0x1111);
-EB8 gEB8_2(0x2222);
+EB8 gEB8_1(0x1001);
+EB8 gEB8_2(0x2002); 
 //PM2 gPM2(0x1234);
 //PM1 gPM1(0x1224);
 //PM3 gPM3(0x1234);
