@@ -46,7 +46,7 @@ void setup()
 {
   // Initialize the serial communication for debugging
   DEBUG_SERIAL_BEGIN();
-  DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ... v1.0"));
+  DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ... v1.00"));
 
   #ifdef MAX3059_AQUABUS_ADAPTER
   //ON MAX3059 based boards, drive RS pin LOW and TERM pin High to match Apex cofiguration
