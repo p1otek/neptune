@@ -10,7 +10,7 @@
 // This software is provided "as is" without express or implied warranty.
 
 // Debug related definitions
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG
 	#include <SoftwareSerial.h>
 	extern SoftwareSerial DebugSerial; // 6 is RX, 7 is TX
@@ -83,7 +83,10 @@ void EB8::processData(byte deviceABAddr, byte* data, unsigned short length)
 		outletStates = ((AB_EB8_REQUEST_PACKET*)data)->OutletStateBitmap;
 		for (int i = 0; i < 8; i++)
 		{
-		 	digitalWrite(outletPins[i], !getOutletState(i));
+///////////////////
+/////////////////// 	tu zmaina z tego co pamietam  taka jak poniżej 
+			byte in = getOutletState(i);
+		 	digitalWrite(outletPins[i], in);
 		}
 	}
 

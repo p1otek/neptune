@@ -10,7 +10,164 @@
 // This software is provided "as is" without express or implied warranty.
 
 // Debug related definitions
-//#define DEBUG
+
+/*
+[21:17:40.8] address = 2
+[21:17:40.8] Rx = "2 20 1 30 0 13 C0 "
+[21:17:40.8] deviceCallback enter
+[21:17:40.8] deviceCallbackdevicesCount = 2
+[21:17:40.8] address = 2
+[21:17:40.8] Rx = "2 20 1 30 0 0 0 2F 0 0 0 0 0 86 8A "
+[21:17:40.8] deviceCallback enter
+[21:17:40.8] deviceCallbackdevicesCount = 2
+[21:17:40.8] address = 2
+[21:17:40.8] Rx = "2 20 1 30 0 13 C0 "
+[21:17:40.9] deviceCallback enter
+[21:17:40.9] deviceCallbackdevicesCount = 2
+[21:17:40.9] address = 2
+[21:17:40.9] Rx = "2 20 1 30 0 0 0 30 0 0 0 0 0 84 E5 "
+[21:17:40.9] deviceCallback enter
+[21:17:40.9] deviceCallbackdevicesCount = 2
+[21:17:40.9] address = 2
+[21:17:40.9] Rx = "0 1 1 3 14 A7 0 0 0 C8 B8 "
+[21:17:40.9] probeCallback enter
+[21:17:40.9] probeCallback: 0 Attaching. Stage 1
+[21:17:40.9]  Attaching. probe's stage  0
+[21:17:40.9]  OLD abAddress 3
+[21:17:40.9]  New abAddress 3
+[21:17:40.9]  OLD ApexSerial 42772
+[21:17:40.9]  New ApexSerial 42772
+[21:17:40.9]  was connected 
+[21:17:40.9]  New/old abAddress 3
+[21:17:40.9]  New/old ApexSerial 42772
+[21:17:40.9] 							Tx = "1 1 20 1 C 3 14 A7 0 0 0 B6 72 "
+[21:17:40.9] probeCallback exit
+[21:17:40.9] Rx = "CE "
+[21:17:40.9] Rx = "0 1 2 3 14 A7 B7 3 8 4A A8 "
+[21:17:40.9] probeCallback enter
+[21:17:40.9] probeCallback: 0 Attaching. Stage 2
+[21:17:41.0]  Attaching. probe's stage  1
+[21:17:41.0]  OLD abAddress 3
+[21:17:41.0]  New abAddress 3
+[21:17:41.0]  OLD ApexSerial 42772
+[21:17:41.0]  New ApexSerial 42772
+[21:17:41.0]  was connected 
+[21:17:41.0]  New/old abAddress 3
+[21:17:41.0]  New/old ApexSerial 42772
+[21:17:41.0] 							Tx = "1 2 20 1 C 3 14 A7 0 0 0 46 7D "
+[21:17:41.0] probeCallback exit
+[21:17:41.0] Rx = "9F "
+[21:17:41.0] Rx = "0 1 3 3 14 A7 0 0 0 EB 78 "
+[21:17:41.0] probeCallback enter
+[21:17:41.0] probeCallback: 0 Attaching. Stage 3
+[21:17:41.0]  Attaching. probe's stage  2
+[21:17:41.0]  OLD abAddress 3
+[21:17:41.0]  New abAddress 3
+[21:17:41.0]  OLD ApexSerial 42772
+[21:17:41.0]  New ApexSerial 42772
+[21:17:41.0] 							Tx = "1 3 20 1 C 3 14 A7 0 0 0 17 B8 "
+[21:17:41.0] probeCallback exit
+[21:17:41.0] Rx = "FD "
+[21:17:42.9] Rx = "0 1 5 3 14 A7 F6 8 8 6B 4C "
+[21:17:42.9] probeCallback enter
+[21:17:42.9] probeCallback: 0 Attaching. Stage 5
+[21:17:42.9]  Attaching. probe's stage  3
+[21:17:42.9]  OLD abAddress 3
+[21:17:42.9]  New abAddress 3
+[21:17:42.9]  OLD ApexSerial 42772
+[21:17:42.9]  New ApexSerial 42772
+[21:17:42.9] 							Tx = "1 5 A0 1 C 3 14 A7 43 42 "
+[21:17:42.9] probeCallback: 0 Attached
+[21:17:42.9] probeCallback exit
+[21:17:42.9] Rx = "C8 "
+[21:17:43.0] Rx = "2 20 1 30 0 13 C0 "
+[21:17:43.0] deviceCallback enter
+[21:17:43.0] deviceCallbackdevicesCount = 2
+[21:17:43.0] address = 2
+[21:17:43.0] Rx = "2 20 1 30 0 0 0 30 0 0 0 0 0 84 E5 "
+[21:17:43.0] deviceCallback enter
+[21:17:43.0] deviceCallbackdevicesCount = 2
+[21:17:43.0] address = 2
+[21:17:43.0] Rx = "0 1 1 4 14 A7 0 0 0 C9 F "
+[21:17:43.0] probeCallback enter
+[21:17:43.0] probeCallback: 0 Attaching. Stage 1
+[21:17:43.0]  Attaching. probe's stage  5
+[21:17:43.0]  OLD abAddress 3
+[21:17:43.0]  New abAddress 4
+[21:17:43.0]  OLD ApexSerial 42772
+[21:17:43.0]  New ApexSerial 42772
+[21:17:43.0] probeCallback: 0 Already Attached
+[21:17:43.0] probeCallback: 1 Attaching. Stage 1
+[21:17:43.0]  Attaching. probe's stage  0
+[21:17:43.0]  OLD abAddress 4
+[21:17:43.0]  New abAddress 4
+[21:17:43.0]  OLD ApexSerial 42772
+[21:17:43.0]  New ApexSerial 42772
+[21:17:43.0]  was connected 
+[21:17:43.0]  New/old abAddress 4
+[21:17:43.0]  New/old ApexSerial 42772
+[21:17:43.0] 							Tx = "1 1 20 1 C 4 14 A7 0 0 0 B7 C5 "
+[21:17:43.0] probeCallback exit
+[21:17:43.0] Rx = "B1 "
+[21:17:43.1] Rx = "0 1 2 4 14 A7 0 0 0 FA F "
+[21:17:43.1] probeCallback enter
+[21:17:43.1] probeCallback: 0 Attaching. Stage 2
+[21:17:43.1]  Attaching. probe's stage  5
+[21:17:43.1]  OLD abAddress 3
+[21:17:43.1]  New abAddress 4
+[21:17:43.1]  OLD ApexSerial 42772
+[21:17:43.1]  New ApexSerial 42772
+[21:17:43.1] probeCallback: 0 Already Attached
+[21:17:43.1] probeCallback: 1 Attaching. Stage 2
+[21:17:43.1]  Attaching. probe's stage  1
+[21:17:43.1]  OLD abAddress 4
+[21:17:43.1]  New abAddress 4
+[21:17:43.1]  OLD ApexSerial 42772
+[21:17:43.1]  New ApexSerial 42772
+[21:17:43.1]  was connected 
+[21:17:43.1]  New/old abAddress 4
+[21:17:43.1]  New/old ApexSerial 42772
+[21:17:43.1] 							Tx = "1 2 20 1 C 4 14 A7 0 0 0 47 CA "
+[21:17:43.1] probeCallback exit
+[21:17:43.1] Rx = "D9 "
+[21:17:43.1] Rx = "0 1 3 4 14 A7 0 0 0 EA CF "
+[21:17:43.1] probeCallback enter
+[21:17:43.1] probeCallback: 0 Attaching. Stage 3
+[21:17:43.2]  Attaching. probe's stage  5
+[21:17:43.2]  OLD abAddress 3
+[21:17:43.2]  New abAddress 4
+[21:17:43.2]  OLD ApexSerial 42772
+[21:17:43.2]  New ApexSerial 42772
+[21:17:43.2] probeCallback: 0 Already Attached
+[21:17:43.2] probeCallback: 1 Attaching. Stage 3
+[21:17:43.2]  Attaching. probe's stage  2
+[21:17:43.2]  OLD abAddress 4
+[21:17:43.2]  New abAddress 4
+[21:17:43.2]  OLD ApexSerial 42772
+[21:17:43.2]  New ApexSerial 42772
+[21:17:43.2] 							Tx = "1 3 20 1 C 4 14 A7 0 0 0 16 F "
+[21:17:43.2] probeCallback exit
+[21:17:43.2] Rx = "F0 "
+[21:17:45.4] Rx = "0 1 5 4 14 A7 F6 8 8 6A FB "
+[21:17:45.4] probeCallback enter
+[21:17:45.4] probeCallback: 0 Attaching. Stage 5
+[21:17:45.4]  Attaching. probe's stage  5
+[21:17:45.4]  OLD abAddress 3
+[21:17:45.4]  New abAddress 4
+[21:17:45.4]  OLD ApexSerial 42772
+[21:17:45.4]  New ApexSerial 42772
+[21:17:45.4] moj skip ;)
+[21:17:45.4] probeCallback: 1 Attaching. Stage 5
+[21:17:45.4]  Attaching. probe's stage  3
+[21:17:45.4]  OLD abAddress 4
+[21:17:45.4]  New abAddress 4
+[21:17:45.4]  OLD ApexSerial 42772
+[21:17:45.4]  New ApexSerial 42772
+
+*/
+
+
+#define DEBUG
 #ifdef DEBUG
 	#include <SoftwareSerial.h>
 	extern SoftwareSerial DebugSerial;
@@ -108,12 +265,19 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 		  
 		  if (((AB_PROBE_REQUEST_PACKET*)frame)->stage == 5)
 		  {
+// tu była zmiana dla pominięcia  jednego stanu 
+		  	if ((devices[i]->probeStage == 5 || devices[i]->probeStage == 0) && devices[i]->abAddress != ((AB_PROBE_REQUEST_PACKET*)frame)->nextAddress )
+		  		continue; 
+
 		  	//cannot jump from nothing to stage 5 unless reattaching existing
 		  	if (devices[i]->probeStage < 3 && (devices[i]->abAddress == 0 || devices[i]->ApexSerial == 0))
 		  		continue;
 		  	ProbeResponseStage5Frame.response.hwId = devices[i]->hwId;
+
+
 		  	if (devices[i]->probeStage == 5)
 		  		ProbeResponseStage5Frame.response.hwId |= 0x80;
+
 		  	ABRetAddr = 0xFF;
 		  	ProbeResponseStage5Frame.response.nextAddress = ((AB_PROBE_REQUEST_PACKET*)frame)->nextAddress;
 		    ProbeResponseStage5Frame.response.hwSerial = ((AB_PROBE_REQUEST_PACKET*)frame)->hwSerial;

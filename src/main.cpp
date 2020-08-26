@@ -6,7 +6,7 @@
 // This software is provided "as is" without express or implied warranty.
 
 // Debug related definitions
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG
   #define DEBUG_SERIAL_BEGIN() DebugSerial.begin(115200)
   #define DEBUG_LOG(string) DebugSerial.print(string)
@@ -46,7 +46,7 @@ void setup()
 {
   // Initialize the serial communication for debugging
   DEBUG_SERIAL_BEGIN();
-  DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ..."));
+  DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ... v1.0"));
 
   #ifdef MAX3059_AQUABUS_ADAPTER
   //ON MAX3059 based boards, drive RS pin LOW and TERM pin High to match Apex cofiguration
