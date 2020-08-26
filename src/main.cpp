@@ -79,9 +79,9 @@ eeprom_update_word(4,0);
 for (int i = 0; i < 8; i++)
 {
   pinMode(eb1Outlets[i], OUTPUT);
-  digitalWrite(eb1Outlets[i], LOW);
+  digitalWrite(eb1Outlets[i], HIGH);
   pinMode(eb2Outlets[i], OUTPUT);
-  digitalWrite(eb2Outlets[i], LOW);
+  digitalWrite(eb2Outlets[i], HIGH);
 }
 
 //AB Address Init
