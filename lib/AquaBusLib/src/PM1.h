@@ -135,13 +135,13 @@ class PM1 : public AquaBusDev
     static AB_PM1_DATA_RESPONSE_FRAME PM1DataResponseFrame;
     static AB_PM1_INIT_RESPONSE_FRAME PM1InitResponseFrame;
     static AB_PM1_EEPROM_RESPONSE_FRAME EEPROMResponseFrame;
-  
 
   protected:
     // Member functions
     void processData(byte deviceABAddr, byte* data, unsigned short length);
     void processEEPROMRequest(byte deviceABAddr, byte* data, unsigned short length);
-    
+    void Init();
+	
     // Member variables
     PM1_STATUS_STRUCT ModuleStatus;
 };

@@ -45,13 +45,13 @@
 
 #include <string.h>
 
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG
 	#include <SoftwareSerial.h>
-	extern SoftwareSerial Serial2;
-  #define DEBUG_LOG(string) Serial2.print(string)
-  #define DEBUG_LOG_LN(string) Serial2.println(string)
-  #define DEBUG_LOG_HEX(string) Serial2.print(string,HEX)
+	extern SoftwareSerial DebugSerial;
+  #define DEBUG_LOG(string) DebugSerial.print(string)
+  #define DEBUG_LOG_LN(string) DebugSerial.println(string)
+  #define DEBUG_LOG_HEX(string) DebugSerial.print(string,HEX)
 #else
   #define DEBUG_LOG(string)
   #define DEBUG_LOG_LN(string)
@@ -172,14 +172,14 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     BOOL            xFrameReceived = FALSE;
     eMBErrorCode    eStatus = MB_ENOERR;
     
-    DEBUG_LOG_LN("eMBRTUReceive enter");
+  //  DEBUG_LOG_LN("eMBRTUReceive enter");
     
     ENTER_CRITICAL_SECTION(  );
     assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
     
 #ifdef DEBUG
-    DEBUG_LOG("Received Buffer Size = ");
-    DEBUG_LOG_LN(usRcvBufferPos);
+  //  DEBUG_LOG("Received Buffer Size = ");
+  //  DEBUG_LOG_LN(usRcvBufferPos);
     if (usRcvBufferPos > 0)
     {
     	DEBUG_LOG("Received Buffer = \"");
@@ -216,7 +216,7 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     }
 
     EXIT_CRITICAL_SECTION(  );
-    //DEBUG_LOG_LN("eMBRTUReceive exit");
+ //   DEBUG_LOG_LN("eMBRTUReceive exit");
     return eStatus;
 }
 
@@ -225,11 +225,11 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     USHORT          usCRC16;
-		DEBUG_LOG_LN("eMBRTUSend enter 0");
+	//	DEBUG_LOG_LN("eMBRTUSend enter 0");
 		
     ENTER_CRITICAL_SECTION(  );
     
-    DEBUG_LOG_LN("eMBRTUSend enter");
+  //  DEBUG_LOG_LN("eMBRTUSend enter");
     
 
     /* Check if the receiver is still in idle state. If not we where to
@@ -238,7 +238,7 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
      */
     if( eRcvState == STATE_RX_IDLE )
     {
-    		DEBUG_LOG_LN("eMBRTUSend STATE_RX_IDLE enter");
+    //		DEBUG_LOG_LN("eMBRTUSend STATE_RX_IDLE enter");
         /* First byte before the Modbus-PDU is the slave address. */
         pucSndBufferCur = ( UCHAR * ) pucFrame - 1;
         usSndBufferCount = 1;
@@ -258,11 +258,24 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
     }
     else
     {
-    		DEBUG_LOG_LN("eMBRTUSend else enter");
+    //		DEBUG_LOG_LN("eMBRTUSend else enter");
         eStatus = MB_EIO;
     }
     EXIT_CRITICAL_SECTION(  );
-    DEBUG_LOG_LN("eMBRTUSend exit");
+    usLength+=2;
+  //  DEBUG_LOG_LN("eMBRTUSend exit");
+    if (usLength > 0)
+    {
+    	DEBUG_LOG("Sent data = \"");
+    	for (int i = 0; i < usLength; i++)
+      {
+      	UCHAR bla = pucFrame[i];
+      	DEBUG_LOG_HEX(bla);
+      	DEBUG_LOG(" ");
+      }
+      DEBUG_LOG_LN("\"");
+    }
+
     return eStatus;
 }
 
@@ -349,25 +362,25 @@ xMBRTUTransmitFSM( void )
         /* We should not get a transmitter event if the transmitter is in
          * idle state.  */
     case STATE_TX_IDLE:
-    		DEBUG_LOG_LN("STATE_TX_IDLE enter");
+    //		DEBUG_LOG_LN("STATE_TX_IDLE enter");
         /* enable receiver/disable transmitter. */
         vMBPortSerialEnable( TRUE, FALSE );
         break;
 
     case STATE_TX_XMIT:
-    		//DEBUG_LOG_LN("STATE_TX_XMIT enter");
+    //		DEBUG_LOG_LN("STATE_TX_XMIT enter");
         /* check if we are finished. */
         if( usSndBufferCount != 0 )
         {
-        	DEBUG_LOG(" ");
-        	DEBUG_LOG_HEX((UCHAR)*pucSndBufferCur);
+     //   	DEBUG_LOG(" ");
+     //   	DEBUG_LOG_HEX((UCHAR)*pucSndBufferCur);
             xMBPortSerialPutByte( ( CHAR )*pucSndBufferCur );
             pucSndBufferCur++;  /* next byte in sendbuffer. */
             usSndBufferCount--;
         }
         else
         {
-        		DEBUG_LOG_LN("xMBRTUTransmitFSM: frame sent");
+    //    		DEBUG_LOG_LN("xMBRTUTransmitFSM: frame sent");
             xNeedPoll = xMBPortEventPost( EV_FRAME_SENT );
             /* Disable transmitter. This prevents another transmit buffer
              * empty interrupt. */
@@ -385,25 +398,25 @@ xMBRTUTimerT35Expired( void )
 {
     BOOL            xNeedPoll = FALSE;
 
-	DEBUG_LOG_LN("xMBRTUTimerT35Expired enter");
+//	DEBUG_LOG_LN("xMBRTUTimerT35Expired enter");
     switch ( eRcvState )
     {
         /* Timer t35 expired. Startup phase is finished. */
     case STATE_RX_INIT:
-    		DEBUG_LOG_LN("STATE_RX_INIT enter");
+    //		DEBUG_LOG_LN("STATE_RX_INIT enter");
         xNeedPoll = xMBPortEventPost( EV_READY );
         break;
 
         /* A frame was received and t35 expired. Notify the listener that
          * a new frame was received. */
     case STATE_RX_RCV:
-    		//DEBUG_LOG_LN("STATE_RX_RCV enter");
+    	//	DEBUG_LOG_LN("STATE_RX_RCV enter");
         xNeedPoll = xMBPortEventPost( EV_FRAME_RECEIVED );
         break;
 
         /* An error occured while receiving the frame. */
     case STATE_RX_ERROR:
-    		DEBUG_LOG_LN("STATE_RX_ERROR enter");
+   // 		DEBUG_LOG_LN("STATE_RX_ERROR enter");
         break;
 
         /* Function called in an illegal state. */
@@ -415,6 +428,6 @@ xMBRTUTimerT35Expired( void )
     vMBPortTimersDisable(  );
     eRcvState = STATE_RX_IDLE;
     
-    DEBUG_LOG_LN("xMBRTUTimerT35Expired exit");
+ //   DEBUG_LOG_LN("xMBRTUTimerT35Expired exit");
     return xNeedPoll;
 }

@@ -58,12 +58,12 @@
 #define MB_PORT_HAS_CLOSE 0
 #endif
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
-//#include <SoftwareSerial.h>
-//extern SoftwareSerial Serial2; // 6 is RX, 7 is TX
-#define DEBUG_LOG(string) Serial2.print(string)
-#define DEBUG_LOG_LN(string) Serial2.println(string)
+#include <SoftwareSerial.h>
+extern SoftwareSerial DebugSerial; // 6 is RX, 7 is TX
+#define DEBUG_LOG(string) DebugSerial.print(string)
+#define DEBUG_LOG_LN(string) DebugSerial.println(string)
 #else
 #define DEBUG_LOG(string)
 #define DEBUG_LOG_LN(string)

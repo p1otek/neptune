@@ -14,7 +14,7 @@
 #define AquaBusLib_h
 
 // Included header files
-#include <Arduino.h>
+#include <arduino.h>
 #include "modbus/include/mb.h"
 #include "AquaBusDev.h"
 
@@ -37,33 +37,50 @@ struct AB_PROBE_RESPONSE_FRAME
 	unsigned short crc;
 }__attribute__((packed));
 
-
+struct AB_PROBE_RESPONSE_STAGE5_PACKET
+{
+	byte code;
+	byte stage;
+	byte hwId;
+	byte hwRevision;
+	byte swRevision;
+	byte nextAddress;
+	unsigned short hwSerial;
+}__attribute__((packed));
+    
+struct AB_PROBE_RESPONSE_STAGE5_FRAME
+{
+	byte address;
+	AB_PROBE_RESPONSE_STAGE5_PACKET response;
+	unsigned short crc;
+}__attribute__((packed));
 
 // The AquaBusLib class
 class AquaBusLib
 {
   // Make the AquaBusDev class friends with this class
   friend class AquaBusDev;
+
   public:
     // Static member functions
     static eMBException probeCallback(byte address, byte* frame, unsigned short length);
     static eMBException deviceCallback(byte address, byte* frame, unsigned short length);
+    static eMBException deviceCallbackCode21(byte address, byte* frame, unsigned short length);
     static eMBException deviceEEPROMCallback(byte address, byte* frame, unsigned short length);
     static AB_PROBE_RESPONSE_FRAME ProbeResponseFrame;
+    static AB_PROBE_RESPONSE_STAGE5_FRAME ProbeResponseStage5Frame;
 
     // Constructor
     AquaBusLib(byte numberOfDevices);
-    AquaBusLib(byte numberOfDevices, byte heartBeat);
+
     // Member functions
     void setup();
     void loop();
-  
 
   protected:
     // Static member variables
     static AquaBusDev** devices;
     static byte devicesCount;
-    static int heartBeat;
 
     // Static member functions
     static void addDevice(AquaBusDev* device);
