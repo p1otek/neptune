@@ -25,9 +25,9 @@
 #include <AquaBusLib.h>
 //#include <EB8.h>
 //#include <PM2.h>
-//#include <PM1.h>
+#include <PM1.h>
 //#include <PM3.h>
-#include <VDM.h>
+//#include <VDM.h>
 
 // Declare global variables
 SoftwareSerial DebugSerial(8, 9); // 8 is RX, 9  is TX
@@ -35,9 +35,9 @@ AquaBusLib gAquaBusLib(1);
 //EB8 gEB8_1(0x1001);
 //EB8 gEB8_2(0x2002); 
 //PM2 gPM2(0x1234);
-//PM1 gPM1(0x1224);
+PM1 gPM1(0x3003);
 //PM3 gPM3(0x1234);
-VDM gVDM(0x3003);
+//VDM gVDM(0x3003);
 
 int incomingByte = 0;   // for incoming serial data
 
@@ -59,19 +59,19 @@ void setup()
   //EB8 setup
 //EB8_1 measures current on analog pin A0
 //EB8_2 measures current on analog pin A1
-gEB8_1.SetCurSensor(ACS712_20A, A1);
-gEB8_2.SetCurSensor(ACS712_20A, A0);
+//gEB8_1.SetCurSensor(ACS712_20A, A1);
+//gEB8_2.SetCurSensor(ACS712_20A, A0);
 
 //EB8_1 uses pins 22-29 for outlets
 //EB8_1 uses pins 30-37 for outlets
-byte eb1Outlets[8] = {22,23,24,25,26,27,28,29};
-byte eb2Outlets[8] = {30,31,32,33,34,35,36,37};
-gEB8_1.SetOutletPins(eb1Outlets);
-gEB8_2.SetOutletPins(eb2Outlets);
+//byte eb1Outlets[8] = {22,23,24,25,26,27,28,29};
+//byte eb2Outlets[8] = {30,31,32,33,34,35,36,37};
+//gEB8_1.SetOutletPins(eb1Outlets);
+//gEB8_2.SetOutletPins(eb2Outlets);
 
-gEB8_1.Init();
-gEB8_2.Init();
-
+//gEB8_1.Init();
+//gEB8_2.Init();
+/*
 eeprom_update_byte(0,0);
 eeprom_update_word(1,0);
 eeprom_update_byte(3,0);
@@ -83,20 +83,20 @@ for (int i = 0; i < 8; i++)
   pinMode(eb2Outlets[i], OUTPUT);
   digitalWrite(eb2Outlets[i], HIGH);
 }
-
+*/
 //AB Address Init
 //eeprom_update_byte(0,0);
 
 //PM1 Init
-//  eeprom_update_byte(3, 0);
-//  eeprom_update_word(4, 0xFFF2);
-//  eeprom_update_word(6, 0xFFF9);
-//  eeprom_update_word(8, 0xFFF0);
-//  eeprom_update_word(10, 0x0238);
-//  eeprom_update_word(12, 0x1000);
-//  eeprom_update_word(14, 0x0B55);
-//  eeprom_update_word(16, 0x0E60);
-//  eeprom_update_word(18, 0x1086);
+  eeprom_update_byte(3, 0);
+  eeprom_update_word(4, 0xFFF2);
+  eeprom_update_word(6, 0xFFF9);
+  eeprom_update_word(8, 0xFFF0);
+  eeprom_update_word(10, 0x0238);
+  eeprom_update_word(12, 0x1000);
+  eeprom_update_word(14, 0x0B55);
+  eeprom_update_word(16, 0x0E60);
+  eeprom_update_word(18, 0x1086);
 
 //PM2 Init
 //  eeprom_update_byte(3, (CONDUCTIVITY_PROBE_RANGE_SALINITY << 1));

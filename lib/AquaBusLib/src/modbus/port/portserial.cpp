@@ -25,7 +25,7 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <avr/signal.h>
+//#include <avr/signal.h>
 
 #include "modbus/port/port.h"
 
@@ -120,9 +120,9 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
     UCSRC = _BV(URSEL) | ucUCSRC;
 #elif defined(__AVR_ATmega16__)
     UCSRC = _BV(URSEL) | ucUCSRC;
-#elif defined(__AVR_ATmega32U4__)
-   // UCSRC = _BV(URSEL) | ucUCSRC;   //nie ma bitu URSEL w atmedz32u4
-    UCSRC |= ucUCSRC;
+#elif defined(__AVR_ATMEGA32__)
+    UCSRC = _BV(URSEL) | ucUCSRC;   //nie ma bitu URSEL w atmedz32u4
+    //UCSRC |= ucUCSRC;
 #elif defined(__AVR_ATmega128__) || defined(__AVR_ATmega128A__)
     UCSRC |= ucUCSRC;
 #elif defined(__AVR_ATmega2560__) 
