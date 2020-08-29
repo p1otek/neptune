@@ -23,21 +23,21 @@
 // Include header files
 #include <AquaBusDev.h>
 #include <AquaBusLib.h>
-#include <EB8.h>
+//#include <EB8.h>
 //#include <PM2.h>
 //#include <PM1.h>
 //#include <PM3.h>
-//#include <VDM.h>
+#include <VDM.h>
 
 // Declare global variables
 SoftwareSerial DebugSerial(8, 9); // 8 is RX, 9  is TX
-AquaBusLib gAquaBusLib(2);
-EB8 gEB8_1(0x1001);
-EB8 gEB8_2(0x2002); 
+AquaBusLib gAquaBusLib(1);
+//EB8 gEB8_1(0x1001);
+//EB8 gEB8_2(0x2002); 
 //PM2 gPM2(0x1234);
 //PM1 gPM1(0x1224);
 //PM3 gPM3(0x1234);
-//VDM gVDM(0x1234);
+VDM gVDM(0x3003);
 
 int incomingByte = 0;   // for incoming serial data
 
