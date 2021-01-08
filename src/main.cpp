@@ -30,7 +30,7 @@
 //#include <VDM.h>
 
 // Declare global variables
-SoftwareSerial DebugSerial(8, 9); // 8 is RX, 9  is TX
+SoftwareSerial DebugSerial(12, 13); // 8 is RX, 9  is TX
 AquaBusLib gAquaBusLib(2);
 EB8 gEB8_1(0x1001);
 EB8 gEB8_2(0x2002); 

@@ -214,8 +214,19 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 	{
 			byte ABRetAddr = 0;
 			
+			if (i ==0){
+				devices[i]->abAddress = 3;
+				devices[i]->ApexSerial = 42772;
+
+			}
+			if (i ==1){
+				devices[i]->abAddress = 4;
+				devices[i]->ApexSerial = 42772;
+
+			}
 			for (int j = 0; j < devicesCount; j++)
 			{
+
 				//cannot respond to a new stage 1 probe request while there are other devices in probe progress
 				if (devices[j]->probeStage > 0 && devices[j]->probeStage < 5 && ((AB_PROBE_REQUEST_PACKET*)frame)->stage == 1)
 					return MB_EX_NONE;
@@ -223,8 +234,6 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 			//check if already attached
 			if (devices[i]->probeStage == 5 && ((AB_PROBE_REQUEST_PACKET*)frame)->stage != 5)
 			{
-				DEBUG_LOG("probeCallback: ");
-				DEBUG_LOG(i);
 				DEBUG_LOG_LN(" Already Attached");
 				continue;
 			}
@@ -233,18 +242,29 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 			if (((AB_PROBE_REQUEST_PACKET*)frame)->stage == 4 || ((AB_PROBE_REQUEST_PACKET*)frame)->stage > 5)
 		    return MB_EX_NONE;
 
-		  DEBUG_LOG("probeCallback: ");
-			DEBUG_LOG(i);
+		  	DEBUG_LOG("probeCallback: ");
+			DEBUG_LOG_LN(i);
 			DEBUG_LOG(" Attaching. Stage");
 			DEBUG_LOG_LN(((AB_PROBE_REQUEST_PACKET*)frame)->stage);
-		  
+			DEBUG_LOG(" Probe's stage: ");
+			DEBUG_LOG_LN(devices[i]->probeStage);
+			DEBUG_LOG(" OLD address: ");
+			DEBUG_LOG_LN(devices[i]->abAddress);
+			DEBUG_LOG(" NEW address: ");
+			DEBUG_LOG_LN(((AB_PROBE_REQUEST_PACKET*)frame)->nextAddress);
+			DEBUG_LOG(" ApexSerial: ");
+			DEBUG_LOG_LN(devices[i]->ApexSerial);
+
+
+//nie sprawdzam apex seriala		  
 		  if ((((AB_PROBE_REQUEST_PACKET*)frame)->stage == 1 || ((AB_PROBE_REQUEST_PACKET*)frame)->stage == 2) && devices[i]->abAddress && devices[i]->ApexSerial)
 		  {
 		  	//this device has already been registered with an apex
 		  	//attempt to reattach existing		
 		  	ProbeResponseFrame.response.nextAddress = devices[i]->abAddress;
 		  	ProbeResponseFrame.response.hwSerial = devices[i]->ApexSerial;
-		  }
+
+					  }
 		  else
 		  {
 		  	ProbeResponseFrame.response.nextAddress = ((AB_PROBE_REQUEST_PACKET*)frame)->nextAddress;
@@ -267,8 +287,12 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 		  {
 // tu była zmiana dla pominięcia  jednego stanu 
 		  	if ((devices[i]->probeStage == 5 || devices[i]->probeStage == 0) && devices[i]->abAddress != ((AB_PROBE_REQUEST_PACKET*)frame)->nextAddress )
-		  		continue; 
+			  {
+				DEBUG_LOG_LN("moj (??) skip");
+				continue; 
 
+			  }
+		  		
 		  	//cannot jump from nothing to stage 5 unless reattaching existing
 		  	if (devices[i]->probeStage < 3 && (devices[i]->abAddress == 0 || devices[i]->ApexSerial == 0))
 		  		continue;
@@ -322,10 +346,10 @@ eMBException AquaBusLib::probeCallback(byte address, byte* frame, unsigned short
 eMBException AquaBusLib::deviceCallback(byte address, byte* frame, unsigned short length)
 {
 	//int i = 0;
-  DEBUG_LOG_LN("deviceCallback enter");
-  DEBUG_LOG("deviceCallback");
-  DEBUG_LOG("devicesCount = ");
-  DEBUG_LOG_LN(devicesCount);
+  //DEBUG_LOG_LN("deviceCallback enter");
+  //DEBUG_LOG("deviceCallback");
+  //DEBUG_LOG("devicesCount = ");
+  //DEBUG_LOG_LN(devicesCount);
   DEBUG_LOG("address = ");
   DEBUG_LOG_LN(address);
   
@@ -459,8 +483,8 @@ void AquaBusLib::loop()
   ret = eMBPoll();
   if (ret != MB_ENOERR)
   	DEBUG_LOG_LN("ERROR: eMBPoll");
-  else
-  	DEBUG_LOG_LN("eMBPoll success");
+ // else
+ // 	DEBUG_LOG_LN("eMBPoll success");
 }
 
 // Function called to add a device

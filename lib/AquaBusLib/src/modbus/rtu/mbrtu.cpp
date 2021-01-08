@@ -182,7 +182,7 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
   //  DEBUG_LOG_LN(usRcvBufferPos);
     if (usRcvBufferPos > 0)
     {
-    	DEBUG_LOG("Received Buffer = \"");
+    	DEBUG_LOG("Rx = \"");
     	for (int i = 0; i < usRcvBufferPos; i++)
       {
       	UCHAR bla = ucRTUBuf[i];
@@ -266,7 +266,7 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
   //  DEBUG_LOG_LN("eMBRTUSend exit");
     if (usLength > 0)
     {
-    	DEBUG_LOG("Sent data = \"");
+    	DEBUG_LOG("\t\t\t\t\t\t\t\ttx= \"");
     	for (int i = 0; i < usLength; i++)
       {
       	UCHAR bla = pucFrame[i];
