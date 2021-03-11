@@ -73,7 +73,7 @@ gEB8_1.Init();
 gEB8_2.Init();
 
 eeprom_update_byte(0,0);
-eeprom_update_word(1,0);
+eeprom_update_word( (uint8_t) 1,0);
 eeprom_update_byte(3,0);
 eeprom_update_word(4,0);
 for (int i = 0; i < 8; i++)

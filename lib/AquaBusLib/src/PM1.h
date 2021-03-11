@@ -111,6 +111,7 @@ struct AB_PM1_INIT_RESPONSE_FRAME
 	unsigned short crc;
 } __attribute__((packed));
 
+
 struct PM1_STATUS_STRUCT
 {
 	byte ProbeRangeOriginal;
@@ -132,6 +133,9 @@ class PM1 : public AquaBusDev
     PM1(unsigned short serial);
     PM1(unsigned short serial, byte swRevision) :
         AquaBusDev(APEX_MODULE_PM1, serial, 0x01, swRevision) {}
+
+
+
     static AB_PM1_DATA_RESPONSE_FRAME PM1DataResponseFrame;
     static AB_PM1_INIT_RESPONSE_FRAME PM1InitResponseFrame;
     static AB_PM1_EEPROM_RESPONSE_FRAME EEPROMResponseFrame;
